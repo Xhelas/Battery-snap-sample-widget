@@ -1,0 +1,1 @@
+# Battery-snap-sample-widget
