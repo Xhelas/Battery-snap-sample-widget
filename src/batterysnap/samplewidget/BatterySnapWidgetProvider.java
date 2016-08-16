@@ -1,11 +1,13 @@
 package batterysnap.samplewidget;
 
+import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.xhelas.batterysnap.WidgetProviderContract;
@@ -63,4 +65,14 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
     public void onEnabled(Context context) {
         ApplicationMain.getInstance().startService();
     }
+
+  @Override
+  public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    super.onUpdate(context, appWidgetManager, appWidgetIds);
+  }
+
+  @Override
+  public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
+    super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
+  }
 }
