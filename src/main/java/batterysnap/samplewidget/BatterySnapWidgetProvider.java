@@ -90,10 +90,12 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
             views.setTextViewText(R.id.WidgetLevel, context.getString(R.string.level_unknown));
             views.setTextViewText(R.id.WidgetRemaining, "");
             views.setTextViewText(R.id.WidgetState, context.getString(R.string.no_battery_snap));
+            views.setImageViewBitmap(R.id.WidgetRing, BatteryRing.draw(-1));
         } else {
             views.setTextViewText(R.id.WidgetLevel, context.getString(R.string.level_format, data.level));
             views.setTextViewText(R.id.WidgetRemaining, formatRemaining(context, data.remainingMillis));
             views.setTextViewText(R.id.WidgetState, context.getString(stateLabel(data.state)));
+            views.setImageViewBitmap(R.id.WidgetRing, BatteryRing.draw(data.level));
         }
 
         // Tapping the widget asks for a refresh

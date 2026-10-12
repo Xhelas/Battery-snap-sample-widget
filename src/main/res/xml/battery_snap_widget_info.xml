@@ -4,7 +4,7 @@
     android:initialLayout="@layout/battery_snap_widget"
     android:minHeight="40dp"
     android:minWidth="40dp"
-    android:previewImage="@drawable/widget_glass_battery"
+    android:previewImage="@drawable/battery_ring"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen|keyguard" />

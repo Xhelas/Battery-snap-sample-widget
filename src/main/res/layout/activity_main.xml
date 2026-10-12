@@ -11,7 +11,7 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:contentDescription="@null"
-        android:src="@drawable/widget_glass_battery" />
+        android:src="@drawable/battery_ring" />
 
     <TextView
         android:id="@+id/Status"
