@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Package visibility (API 30+): needed to query BatterySnap's content provider. -->
+    <queries>
+        <provider android:authorities="com.xhelas.batterysnap.widgetdata" />
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name">
+
+        <!-- Exported: BatterySnap, another app, sends WIDGET_DATA_UPDATE to this receiver. -->
+        <receiver
+            android:name=".BatterySnapWidgetProvider"
+            android:exported="true">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/battery_snap_widget_info" />
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.xhelas.batterysnap.WIDGET_DATA_UPDATE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

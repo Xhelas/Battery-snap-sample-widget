@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="app_name">BatterySnap sample widget</string>
+    <string name="widget_description">Battery level and remaining time, read from BatterySnap</string>
+
+    <string name="level_unknown">--</string>
+    <string name="level_format">%d%%</string>
+    <!-- Remaining time, hours and minutes. -->
+    <string name="remaining_format">%1$dh%2$02d</string>
+    <string name="no_battery_snap">Install BatterySnap</string>
+
+    <string name="state_full">Full</string>
+    <string name="state_discharging">Discharging</string>
+    <string name="state_charging_usb">USB charging</string>
+    <string name="state_charging_ac">AC charging</string>
+    <string name="state_charging_wireless">Wireless charging</string>
+
+</resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- The launcher adds its own padding around widgets since API 14. -->
     <dimen name="widget_margin">0dp</dimen>
 
 </resources>

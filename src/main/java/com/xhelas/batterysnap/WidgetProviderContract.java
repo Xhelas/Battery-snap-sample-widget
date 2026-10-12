@@ -3,6 +3,9 @@ package com.xhelas.batterysnap;
 import android.net.Uri;
 import android.net.Uri.Builder;
 
+/**
+ * Contract of the content provider exposed by BatterySnap. Copy this class as is into a client app.
+ */
 public class WidgetProviderContract {
 
   public static final String AUTHORITY = "com.xhelas.batterysnap.widgetdata";
