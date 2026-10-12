@@ -4,12 +4,23 @@
     <!-- Package visibility (API 30+): needed to query BatterySnap's content provider. -->
     <queries>
         <provider android:authorities="com.xhelas.batterysnap.widgetdata" />
+        <!-- To find BatterySnap's launch activity. -->
+        <package android:name="com.xelacorp.android.batsnaps" />
     </queries>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- Exported: BatterySnap, another app, sends WIDGET_DATA_UPDATE to this receiver. -->
         <receiver

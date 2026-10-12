@@ -10,6 +10,12 @@
     <string name="remaining_format">%1$dh%2$02d</string>
     <string name="no_battery_snap">Install BatterySnap</string>
 
+    <string name="battery_snap_installed">BatterySnap is installed. This sample widget reads its battery data.</string>
+    <string name="battery_snap_missing">This sample widget needs BatterySnap to get its battery data.</string>
+    <string name="open_battery_snap">Open BatterySnap</string>
+    <string name="get_battery_snap">Get BatterySnap on Google Play</string>
+    <string name="add_widget_hint">To add the widget, long-press your home screen and choose Widgets.</string>
+
     <string name="state_full">Full</string>
     <string name="state_discharging">Discharging</string>
     <string name="state_charging_usb">USB charging</string>

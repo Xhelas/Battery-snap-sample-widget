@@ -16,6 +16,8 @@ BatterySnap watches how your battery charges and discharges and estimates the ti
 
 Tap the widget to refresh it. If BatterySnap is not installed, the widget says so.
 
+The app also has a small launcher screen with a button that opens BatterySnap, or its Google Play page when it is not installed.
+
 ## How it works
 
 1. BatterySnap exposes a read-only `ContentProvider` with authority `com.xhelas.batterysnap.widgetdata`. Its columns, units and state constants are described in [`WidgetProviderContract.java`](src/main/java/com/xhelas/batterysnap/WidgetProviderContract.java). That file is the whole API: copy it into your app unchanged.
