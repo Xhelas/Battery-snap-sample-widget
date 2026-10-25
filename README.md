@@ -13,6 +13,7 @@ BatterySnap watches how your battery charges and discharges and estimates the ti
 - The battery level, in percent
 - The remaining time estimated by BatterySnap: until empty when discharging, until full when charging
 - The charge state: discharging, USB / AC / wireless charging, full
+- The power drawn or received by the battery, in watts, when the device reports its current
 
 Tap the widget to refresh it. If BatterySnap is not installed, the widget says so.
 
@@ -39,6 +40,7 @@ Your app needs three things in its manifest, all shown in [`AndroidManifest.xml`
 | `state` | int | `0` full, `1` discharging, `2` USB charging, `3` AC charging, `4` wireless charging |
 | `temperature` | int | Tenths of a degree Celsius (`200` = 20 °C) |
 | `voltage` | int | Millivolts |
+| `power` | int | Milliwatts (current × voltage), signed as the device reports the current: usually positive while charging, negative while discharging. `NULL` when the device reports no usable current. Absent (`getColumnIndex` returns -1) with older BatterySnap versions. |
 
 ## Build
 

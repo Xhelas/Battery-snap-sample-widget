@@ -47,6 +47,15 @@
             android:shadowRadius="3"
             android:textColor="#FFFFFFFF"
             android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/WidgetPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="#FF000000"
+            android:shadowRadius="3"
+            android:textColor="#FFFFFFFF"
+            android:textSize="11sp" />
     </LinearLayout>
 
 </FrameLayout>
