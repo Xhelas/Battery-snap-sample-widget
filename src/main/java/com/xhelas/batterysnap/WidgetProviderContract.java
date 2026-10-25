@@ -35,6 +35,15 @@ public class WidgetProviderContract {
      */
     String VOLTAGE = "voltage";
     /**
+     * The power in milliwatt : current times voltage, with the sign of the current as reported by the device (most devices
+     * report a positive value while charging and a negative one while discharging, some the opposite). The average current
+     * of the fuel gauge is used when available, the instantaneous one otherwise.
+     * NULL when the device does not report a usable current. Not returned at all by BatterySnap versions older than this
+     * column: check {@link android.database.Cursor#getColumnIndex(String)} for -1.
+     * <p>Type : INTEGER
+     */
+    String POWER = "power";
+    /**
      * The state of the battery : see the {@link State} documentation.
      * <p>Type : INTEGER
      */

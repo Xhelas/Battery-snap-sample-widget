@@ -15,7 +15,7 @@ import com.xhelas.batterysnap.WidgetProviderContract.Columns;
 import com.xhelas.batterysnap.WidgetProviderContract.State;
 
 /**
- * Home screen widget showing the battery level, remaining time and charge state computed by BatterySnap.
+ * Home screen widget showing the battery level, remaining time, charge state and power computed by BatterySnap.
  * <p>
  * The data is read from BatterySnap's content provider (see {@link WidgetProviderContract}). The widget is redrawn when:
  * <ul>
@@ -31,7 +31,7 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
     /** Sent by BatterySnap when the widget data changed. */
     static final String ACTION_WIDGET_DATA_UPDATE = "com.xhelas.batterysnap.WIDGET_DATA_UPDATE";
 
-    private static final String[] PROJECTION = {Columns.LEVEL, Columns.REMAINING_DURATION, Columns.STATE};
+    private static final String[] PROJECTION = {Columns.LEVEL, Columns.REMAINING_DURATION, Columns.STATE, Columns.POWER};
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -69,10 +69,14 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
             if (cursor == null || !cursor.moveToFirst()) {
                 return null;
             }
+            // Older BatterySnap versions do not return the power column, and it is NULL when the device reports no current
+            int powerIndex = cursor.getColumnIndex(Columns.POWER);
+            Integer powerMilliWatts = powerIndex < 0 || cursor.isNull(powerIndex) ? null : cursor.getInt(powerIndex);
             BatteryData data = new BatteryData(
                     cursor.getInt(cursor.getColumnIndexOrThrow(Columns.LEVEL)),
                     cursor.getLong(cursor.getColumnIndexOrThrow(Columns.REMAINING_DURATION)),
-                    cursor.getInt(cursor.getColumnIndexOrThrow(Columns.STATE)));
+                    cursor.getInt(cursor.getColumnIndexOrThrow(Columns.STATE)),
+                    powerMilliWatts);
             if (BuildConfig.DEBUG) {
                 Log.d(tag, "Queried " + data);
             }
@@ -90,11 +94,13 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
             views.setTextViewText(R.id.WidgetLevel, context.getString(R.string.level_unknown));
             views.setTextViewText(R.id.WidgetRemaining, "");
             views.setTextViewText(R.id.WidgetState, context.getString(R.string.no_battery_snap));
+            views.setTextViewText(R.id.WidgetPower, "");
             views.setImageViewBitmap(R.id.WidgetRing, BatteryRing.draw(-1));
         } else {
             views.setTextViewText(R.id.WidgetLevel, context.getString(R.string.level_format, data.level));
             views.setTextViewText(R.id.WidgetRemaining, formatRemaining(context, data.remainingMillis));
             views.setTextViewText(R.id.WidgetState, context.getString(stateLabel(data.state)));
+            views.setTextViewText(R.id.WidgetPower, formatPower(context, data.powerMilliWatts));
             views.setImageViewBitmap(R.id.WidgetRing, BatteryRing.draw(data.level));
         }
 
@@ -113,6 +119,13 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
         }
         long minutes = remainingMillis / 60_000;
         return context.getString(R.string.remaining_format, (int) (minutes / 60), (int) (minutes % 60));
+    }
+
+    private static String formatPower(Context context, Integer powerMilliWatts) {
+        if (powerMilliWatts == null) {
+            return "";
+        }
+        return context.getString(R.string.power_format, powerMilliWatts / 1000f);
     }
 
     private static int stateLabel(int state) {
@@ -135,16 +148,19 @@ public class BatterySnapWidgetProvider extends AppWidgetProvider {
         final int level;
         final long remainingMillis;
         final int state;
+        /** {@code null} when unknown. */
+        final Integer powerMilliWatts;
 
-        BatteryData(int level, long remainingMillis, int state) {
+        BatteryData(int level, long remainingMillis, int state, Integer powerMilliWatts) {
             this.level = level;
             this.remainingMillis = remainingMillis;
             this.state = state;
+            this.powerMilliWatts = powerMilliWatts;
         }
 
         @Override
         public String toString() {
-            return "level=" + level + " remainingMillis=" + remainingMillis + " state=" + state;
+            return "level=" + level + " remainingMillis=" + remainingMillis + " state=" + state + " powerMilliWatts=" + powerMilliWatts;
         }
     }
 }

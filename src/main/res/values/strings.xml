@@ -2,12 +2,14 @@
 <resources>
 
     <string name="app_name">BatterySnap sample widget</string>
-    <string name="widget_description">Battery level and remaining time, read from BatterySnap</string>
+    <string name="widget_description">Battery level, remaining time and power, read from BatterySnap</string>
 
     <string name="level_unknown">--</string>
     <string name="level_format">%d%%</string>
     <!-- Remaining time, hours and minutes. -->
     <string name="remaining_format">%1$dh%2$02d</string>
+    <!-- Power in watts, signed as reported by the device. -->
+    <string name="power_format">%.1f W</string>
     <string name="no_battery_snap">Install BatterySnap</string>
 
     <string name="battery_snap_installed">BatterySnap is installed. This sample widget reads its battery data.</string>
